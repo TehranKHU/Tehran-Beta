@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
-import { signupUser } from '../../actions/userActions';
+// import { signupUser } from '../../actions/userActions';
 import PropTypes from 'prop-types';
 
 class SignupForm extends Component {
@@ -79,7 +79,7 @@ class SignupForm extends Component {
 						</div>
 					</div>
 
-					<Button
+					<input
 						type='submit'
 						className='signup-button'
 						value='ثبت نام'
@@ -95,10 +95,10 @@ class SignupForm extends Component {
 	}
 }
 
-Signup.propTypes = {
-	signupUser : PropTypes.func.isRequired
+SignupForm.propTypes = {
+	// signupUser : PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({});
 
-export default connect(mapStateToProps, { signupUser })(SignupForm);
+export default connect(mapStateToProps, {})(SignupForm);
