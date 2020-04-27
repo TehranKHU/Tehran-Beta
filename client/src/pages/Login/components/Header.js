@@ -11,12 +11,16 @@ class Header extends Component {
 				/>
 
 				<div className='header__text-container'>
-					<LoginSVG name='HeaderLogo' className='header__logo' />
+					<a href='/'>
+						<LoginSVG name='HeaderLogo' className='header__logo' />
+					</a>
 
 					<nav>
 						<ul>
 							<li>
-								<a href='/signup'>ثبت نام</a>
+								<a href='/signup' className='active'>
+									ثبت نام
+								</a>
 							</li>
 							<li>
 								<a href='/login'>ورود</a>

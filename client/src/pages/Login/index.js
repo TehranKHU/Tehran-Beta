@@ -9,7 +9,7 @@ import './styles.scss';
 class Login extends Component {
 	render() {
 		return (
-			<div>
+			<div id='container'>
 				<Header />
 				<LoginForm />
 				<Footer />

@@ -1,4 +1,11 @@
 @import "../config";
+@import url("https://use.fontawesome.com/releases/v5.3.1/css/all.css");
+
+#container {
+	position: relative;
+
+	min-height: 100vh;
+}
 
 header {
 	.header__background {
@@ -30,6 +37,12 @@ header {
 			padding: 4rem 10rem;
 
 			ul {
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-start;
+
+				width: 60rem;
+
 				list-style: none;
 
 				font-family: $font_sahel;
@@ -38,28 +51,31 @@ header {
 				li {
 					display: inline-block;
 
-					margin-right: 5rem;
-					padding: 0.5rem 2rem;
+					// width: 16rem;
 
-					transition: all 100ms ease 0ms;
-
-					&:hover {
-						color: $color_black;
-
-						border-bottom: 0.2rem solid $color_black;
-						border-radius: 1rem;
-					}
+					text-align: center;
 
 					a {
 						color: $color_gray_30;
 
-						// border: 10px solid $color_black;
+						display: inline-block;
+
+						// width: 100%;
+
+						padding: 0.5rem 2.5rem;
 
 						text-decoration: none;
 
 						&:hover {
-							color: $color_gray_30;
-							text-decoration: none;
+							color: $color_yellow;
+
+							border: none;
+							border-radius: 10rem;
+
+							box-shadow: inset 0 10rem 0 0 $color_red_flamingo,
+								inset 0 -10rem 0 0 $color_red_flamingo;
+
+							transition: all 0.25s linear;
 						}
 					}
 				}
@@ -91,7 +107,7 @@ header {
 		text-align: center;
 	}
 
-	.signup-form {
+	.login-form {
 		margin-top: 6rem;
 		width: 100%;
 
@@ -214,7 +230,7 @@ header {
 			}
 		}
 
-		.singup-button {
+		.login-button {
 			background-color: $color_red_flamingo;
 			color: $color_white;
 
@@ -278,7 +294,7 @@ footer {
 
 		position: relative;
 
-		right: 2rem;
+		right: 10rem;
 		bottom: 2rem;
 
 		font-size: 2.4rem;
