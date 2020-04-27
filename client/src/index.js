@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 
 import App from './App';
 import Login from './pages/Login';
+import Signup from './pages/Signup';
 import NotFound from './pages/NotFound';
 
 import * as serviceWorker from './serviceWorker';
@@ -15,6 +16,7 @@ const routing = (
 		<Switch>
 			<Route exact path='/' component={App} />
 			<Route path='/login' component={Login} />
+			<Route path='/signup' component={Signup} />
 			<Route component={NotFound} />
 		</Switch>
 	</BrowserRouter>
