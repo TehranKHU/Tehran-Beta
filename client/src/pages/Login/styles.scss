@@ -1,5 +1,73 @@
 @import "../config";
 
+header {
+	.header__background {
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: -99;
+	}
+
+	.header__text-container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		margin: 0;
+
+		.header__logo {
+			order: 1;
+
+			margin-left: auto;
+			padding-right: 10rem;
+
+			cursor: pointer;
+		}
+
+		nav {
+			order: 2;
+
+			padding: 4rem 10rem;
+
+			ul {
+				list-style: none;
+
+				font-family: $font_sahel;
+				font-size: 2.4rem;
+
+				li {
+					display: inline-block;
+
+					margin-right: 5rem;
+					padding: 0.5rem 2rem;
+
+					transition: all 100ms ease 0ms;
+
+					&:hover {
+						color: $color_black;
+
+						border-bottom: 0.2rem solid $color_black;
+						border-radius: 1rem;
+					}
+
+					a {
+						color: $color_gray_30;
+
+						// border: 10px solid $color_black;
+
+						text-decoration: none;
+
+						&:hover {
+							color: $color_gray_30;
+							text-decoration: none;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
 .form-wrapper {
 	display: flex;
 	flex-direction: column;
@@ -191,5 +259,29 @@
 				text-decoration: none;
 			}
 		}
+	}
+}
+
+footer {
+	position: absolute;
+	bottom: 0;
+
+	.footer__background {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		z-index: -99;
+	}
+
+	.footer__text-container {
+		color: $color_white;
+
+		position: relative;
+
+		right: 2rem;
+		bottom: 2rem;
+
+		font-size: 2.4rem;
+		font-weight: 600;
 	}
 }
