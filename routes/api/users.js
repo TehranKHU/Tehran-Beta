@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const bcrypt = require('bcryptjs');
+
 const database = require('./database');
 const errorHandler = require('../../helpers/error_handler');
 
@@ -40,26 +42,42 @@ router.get('/:username', (req, res) => {
 router.post('/', (req, res) => {
 	const { username, password, email } = req.body;
 
+	// Validation
+	if (!username || !email || !password) {
+		return res.status(400).json({ msg: 'لطفاً تمام فیلدها را پر کنید.' });
+	}
+
+	// Check for existing model
 	let command = `SELECT * FROM user WHERE username="${username}"`;
 
 	database.query(command, (err, result) => {
 		if (err) {
 			errorHandler('Cannot SELECT user data !', err);
 		} else if (result.length > 0) {
-			// TODO: Send error message to user
-			errorHandler('User already exists !', err);
+			return res
+				.status(400)
+				.json({ msg: 'این نام کاربری قبلاً در سامانه ثبت شده است.' });
 		} else {
-			command =
-				'INSERT INTO user(username, password, email, join_date) ' +
-				`VALUES('${username}', '${password}', '${email}', '${Date.now()}');`;
+			// Create salt & hash
+			bcrypt.genSalt(10, (err, salt) => {
+				bcrypt.hash(password, salt, (err, hash) => {
+					if (err) throw err;
 
-			database.query(command, (err) => {
-				if (err) {
-					errorHandler('Cannot INSERT new user !', err);
-				} else {
-					// TODO: Make user loged in
-					res.send("it's all OK !");
-				}
+					command =
+						'INSERT INTO user(username, password, email, join_date) ' +
+						`VALUES('${username}', '${hash}', '${email}', '${Date.now()}');`;
+
+					database.query(command, (err) => {
+						if (err) {
+							errorHandler('Cannot INSERT new user !', err);
+						} else {
+							// TODO: Make user loged in
+							res.json({
+								msg : "It's all OK !"
+							});
+						}
+					});
+				});
 			});
 		}
 	});
