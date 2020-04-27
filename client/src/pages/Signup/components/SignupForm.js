@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 
+import { connect } from 'react-redux';
+import { signupUser } from '../../actions/userActions';
+import PropTypes from 'prop-types';
+
 class SignupForm extends Component {
 	focusHandler() {
 		let parent = this.parentNode.parentNode;
@@ -22,11 +26,17 @@ class SignupForm extends Component {
 		});
 	}
 
+	clickedOnSubmitButton = () => {
+		this.props.signupUser();
+	};
+
 	render() {
 		return (
 			<div className='form-wrapper'>
 				<span className='form-wrapper__title'>ثبت نام کنید!</span>
-				<form action='' className='signup-form'>
+				<form
+					onSubmit={this.clickedOnSubmitButton}
+					className='signup-form'>
 					<div className='input-container'>
 						<div className='input-container__icon'>
 							<i className='fa fa-user' />
@@ -69,10 +79,10 @@ class SignupForm extends Component {
 						</div>
 					</div>
 
-					<input
+					<Button
 						type='submit'
 						className='signup-button'
-						value='ورود'
+						value='ثبت نام'
 					/>
 
 					<span className='signup-form__have-account'>
@@ -85,4 +95,10 @@ class SignupForm extends Component {
 	}
 }
 
-export default SignupForm;
+Signup.propTypes = {
+	signupUser : PropTypes.func.isRequired
+};
+
+const mapStateToProps = (state) => ({});
+
+export default connect(mapStateToProps, { signupUser })(SignupForm);

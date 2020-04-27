@@ -6,7 +6,7 @@ import Footer from './components/Footer';
 
 import './styles.scss';
 
-class Login extends Component {
+class Signup extends Component {
 	render() {
 		return (
 			<div id='container'>
@@ -18,4 +18,4 @@ class Login extends Component {
 	}
 }
 
-export default Login;
+export default Signup;
