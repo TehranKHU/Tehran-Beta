@@ -11,7 +11,7 @@ import {
 	LOGOUT_SUCCESS,
 	SIGNUP_SUCCESS,
 	SIGNUP_FAIL
-} from '../actions/types';
+} from './types';
 
 // Check token & load user
 export const loadUser = () => (dispatch, getState) => {
@@ -19,7 +19,7 @@ export const loadUser = () => (dispatch, getState) => {
 	dispatch({ type: USER_LOADING });
 
 	axios
-		.get('/api/users', tokenConfig(getState))
+		.get('/api/auth/user', tokenConfig(getState))
 		.then((res) =>
 			dispatch({
 				type    : USER_LOADED,
@@ -27,7 +27,7 @@ export const loadUser = () => (dispatch, getState) => {
 			})
 		)
 		.catch((err) => {
-			dispatch(returnErrors(err.response.data, err.response.status));
+			dispatch(returnErrors(err.response.data.msg, err.response.status));
 
 			dispatch({
 				type : AUTH_ERROR
@@ -38,7 +38,7 @@ export const loadUser = () => (dispatch, getState) => {
 // Setup config/headers and token
 export const tokenConfig = (getState) => {
 	// Get token from localStorage
-	const token = getState().userReducer.token;
+	const token = getState().authReducer.token;
 
 	// Headers
 	const config = {
