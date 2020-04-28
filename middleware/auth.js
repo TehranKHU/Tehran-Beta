@@ -12,6 +12,8 @@ function auth(req, res, next) {
 	}
 
 	try {
+		console.log('--> token --> ', token);
+
 		const decoded = jwt.verify(token, config.get('jwtSecret'));
 		req.user = decoded;
 
