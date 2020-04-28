@@ -9,7 +9,7 @@ import Signup from './pages/Signup';
 import NotFound from './pages/NotFound';
 
 import * as serviceWorker from './serviceWorker';
-import { Route, Link, BrowserRouter, Switch } from 'react-router-dom';
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
 
 const routing = (
 	<BrowserRouter>

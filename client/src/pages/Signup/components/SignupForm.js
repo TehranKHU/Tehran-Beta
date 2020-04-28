@@ -132,7 +132,7 @@ class SignupForm extends Component {
 
 						<span className='signup-form__have-account'>
 							قبلاً ثبت نام کردید؟
-							<a href='#'> وارد شوید!</a>
+							<a href='/login'> وارد شوید!</a>
 						</span>
 					</form>
 				</div>

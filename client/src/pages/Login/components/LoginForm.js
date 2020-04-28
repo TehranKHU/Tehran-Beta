@@ -69,7 +69,7 @@ class LoginForm extends Component {
 					</span>
 					<span className='login-form__have-account'>
 						<span>کاربر جدید هستید؟ </span>
-						<a href='#'>ثبت نام کنید!</a>
+						<a href='/signup'>ثبت نام کنید!</a>
 					</span>
 				</form>
 			</div>
