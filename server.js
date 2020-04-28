@@ -1,16 +1,13 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-
-// Routes
-const users = require('./routes/api/users');
 
 const app = express();
 
 // Body Parser Middleware
-app.use(bodyParser.json());
+app.use(express.json());
 
 // Use Routes
-app.use('/api/users', users);
+app.use('/api/users', require('./routes/api/users'));
+app.use('/api/auth', require('./routes/api/auth'));
 
 // Start Server
 const port = process.env.PORT || 5000;
