@@ -1,5 +1,4 @@
 @import "../config";
-@import url("https://use.fontawesome.com/releases/v5.3.1/css/all.css");
 
 #container {
 	position: relative;
@@ -81,6 +80,28 @@ header {
 				}
 			}
 		}
+	}
+}
+
+.alert {
+	color: $color_white;
+
+	position: absolute;
+
+	right: 10rem;
+	top: 30rem;
+
+	width: fit-content;
+
+	padding: 1rem 3rem;
+
+	border: none;
+	border-radius: 1rem;
+
+	font-size: 2.4rem;
+
+	&-error {
+		background-color: $color_red_flamingo;
 	}
 }
 
