@@ -16,7 +16,7 @@ router.post('/', (req, res) => {
 	const { username, password, email } = req.body;
 
 	// Validation
-	if (!username || !email || !password) {
+	if (!username || !password) {
 		return res.status(400).json({ msg: 'لطفاً تمام فیلدها را پر کنید.' });
 	}
 

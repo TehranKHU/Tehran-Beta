@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 import { signupUser } from '../../../actions/authActions';
+import { clearErrors } from '../../../actions/errorActions';
 import PropTypes from 'prop-types';
 
 class SignupForm extends Component {
 	state = {
-		name     : '',
+		username : '',
 		email    : '',
 		password : '',
 		msg      : null
@@ -31,6 +32,8 @@ class SignupForm extends Component {
 
 	clickedOnSubmitButton = (e) => {
 		e.preventDefault();
+
+		this.props.clearErrors();
 
 		const { username, email, password } = this.state;
 
@@ -144,7 +147,8 @@ class SignupForm extends Component {
 SignupForm.propTypes = {
 	isAuthenticated : PropTypes.bool,
 	error           : PropTypes.object.isRequired,
-	signupUser      : PropTypes.func.isRequired
+	signupUser      : PropTypes.func.isRequired,
+	clearErrors     : PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -152,4 +156,6 @@ const mapStateToProps = (state) => ({
 	error           : state.errorReducer
 });
 
-export default connect(mapStateToProps, { signupUser })(SignupForm);
+export default connect(mapStateToProps, { signupUser, clearErrors })(
+	SignupForm
+);

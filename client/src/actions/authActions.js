@@ -68,6 +68,39 @@ export const signupUser = ({ username, email, password }) => (dispatch) => {
 		});
 };
 
+// Login user
+export const loginUser = ({ username, password }) => (dispatch) => {
+	// Headers
+	const config = {
+		headers : { 'Content-type': 'application/json' }
+	};
+
+	// Request body
+	const body = JSON.stringify({ username, password });
+
+	axios
+		.post('/api/auth', body, config)
+		.then((res) =>
+			dispatch({
+				type    : LOGIN_SUCCESS,
+				payload : res.data
+			})
+		)
+		.catch((err) => {
+			dispatch(
+				returnErrors(
+					err.response.data.msg,
+					err.response.status,
+					'LOGIN_FAIL'
+				)
+			);
+
+			dispatch({
+				type : LOGIN_FAIL
+			});
+		});
+};
+
 // Setup config/headers and token
 export const tokenConfig = (getState) => {
 	// Get token from localStorage
