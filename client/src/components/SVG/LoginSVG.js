@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import HeaderBackground from '../../assets/svg/login/header_background.svg';
 import HeaderCircles from '../../assets/svg/login/header_circles.svg';

@@ -5,13 +5,14 @@ import store from '../../store';
 import { loadUser } from '../../actions/authActions';
 
 import Header from './components/Header';
-import SignupForm from './components/SignupForm';
+import Main from './components/Main';
 import Footer from './components/Footer';
 
 import './styles.scss';
 
-class Signup extends Component {
+class Dashboard extends Component {
 	componentWillMount() {
+		console.log('--> dashboard index --> componentWillMount');
 		store.dispatch(loadUser());
 	}
 
@@ -19,13 +20,15 @@ class Signup extends Component {
 		return (
 			<Provider store={store}>
 				<div id='container'>
-					<Header />
-					<SignupForm />
-					<Footer />
+					{/* <Header /> */}
+					<header>This is a header</header>
+					<Main />
+					{/* <Footer /> */}
+					<footer>This is a footer</footer>
 				</div>
 			</Provider>
 		);
 	}
 }
 
-export default Signup;
+export default Dashboard;
