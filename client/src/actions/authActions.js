@@ -101,6 +101,13 @@ export const loginUser = ({ username, password }) => (dispatch) => {
 		});
 };
 
+// Logout User
+export const logoutUser = () => {
+	return {
+		type : LOGOUT_SUCCESS
+	};
+};
+
 // Setup config/headers and token
 export const tokenConfig = (getState) => {
 	// Get token from localStorage
