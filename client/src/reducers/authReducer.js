@@ -21,7 +21,7 @@ export default function(state = initialState, action) {
 		case USER_LOADING:
 			return {
 				...state,
-				isloading : true
+				isLoading : true
 			};
 		case USER_LOADED:
 			return {

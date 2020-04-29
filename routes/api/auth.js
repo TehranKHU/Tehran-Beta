@@ -8,6 +8,7 @@ const authMiddleware = require('../../middleware/auth');
 
 const database = require('./database');
 const errorHandler = require('../../helpers/error_handler');
+const remapUserColumns = require('../../helpers/user_information_handler');
 
 // @route	POST	api/auth
 // @desc	Auth User
@@ -38,17 +39,16 @@ router.post('/', (req, res) => {
 						.status(400)
 						.json({ msg: 'نام کاربری یا رمز عبور صحیح نمی‌باشد.' });
 
-				delete result[0].password;
 				jwt.sign(
 					{ username: username },
 					config.get('jwtSecret'),
-					{ expiresIn: 60 },
+					{ expiresIn: 3600 },
 					(err, token) => {
 						if (err) throw err;
 
 						res.json({
 							token : token,
-							user  : result[0]
+							user  : remapUserColumns(result[0])
 						});
 					}
 				);
@@ -64,8 +64,7 @@ router.get('/user', authMiddleware, (req, res) => {
 	let command = `SELECT * FROM user WHERE username="${req.user.username}"`;
 
 	database.query(command, (err, result) => {
-		delete result[0].password;
-		res.json(result[0]);
+		res.json(remapUserColumns(result[0]));
 	});
 });
 

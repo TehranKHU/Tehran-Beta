@@ -8,6 +8,7 @@ const config = require('config');
 const database = require('./database');
 const errorHandler = require('../../helpers/error_handler');
 const getCurrentDate = require('../../helpers/date_handler');
+const remapUserColumns = require('../../helpers/user_information_handler');
 
 // @route	POST	api/users
 // @desc	Add New User
@@ -53,18 +54,18 @@ router.post('/', (req, res) => {
 										err
 									);
 								} else {
-									delete result[0].password;
-
 									jwt.sign(
 										{ username: username },
 										config.get('jwtSecret'),
-										{ expiresIn: 60 },
+										{ expiresIn: 3600 },
 										(err, token) => {
 											if (err) throw err;
 
 											res.json({
 												token : token,
-												user  : result[0]
+												user  : remapUserColumns(
+													result[0]
+												)
 											});
 										}
 									);

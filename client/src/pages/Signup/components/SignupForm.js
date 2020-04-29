@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import { signupUser } from '../../../actions/authActions';
@@ -69,6 +70,8 @@ class SignupForm extends Component {
 	}
 
 	render() {
+		if (this.props.isAuthenticated) return <Redirect to='/dashboard' />;
+
 		return (
 			<React.Fragment>
 				{this.state.msg ? (

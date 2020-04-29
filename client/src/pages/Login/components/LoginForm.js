@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import { loginUser } from '../../../actions/authActions';
@@ -26,7 +27,6 @@ class LoginForm extends Component {
 
 	onChange = (e) => {
 		this.setState({ [e.target.name]: e.target.value });
-		console.log(this.state);
 	};
 
 	clickedOnSubmitButton = (e) => {
@@ -67,6 +67,8 @@ class LoginForm extends Component {
 	}
 
 	render() {
+		if (this.props.isAuthenticated) return <Redirect to='/dashboard' />;
+
 		return (
 			<React.Fragment>
 				{this.state.msg ? (
