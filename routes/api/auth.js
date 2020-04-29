@@ -38,6 +38,7 @@ router.post('/', (req, res) => {
 						.status(400)
 						.json({ msg: 'نام کاربری یا رمز عبور صحیح نمی‌باشد.' });
 
+				delete result[0].password;
 				jwt.sign(
 					{ username: username },
 					config.get('jwtSecret'),
@@ -46,7 +47,8 @@ router.post('/', (req, res) => {
 						if (err) throw err;
 
 						res.json({
-							token : token
+							token : token,
+							user  : result[0]
 						});
 					}
 				);

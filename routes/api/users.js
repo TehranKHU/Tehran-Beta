@@ -7,6 +7,7 @@ const config = require('config');
 
 const database = require('./database');
 const errorHandler = require('../../helpers/error_handler');
+const getCurrentDate = require('../../helpers/date_handler');
 
 // @route	POST	api/users
 // @desc	Add New User
@@ -37,24 +38,38 @@ router.post('/', (req, res) => {
 
 					command =
 						'INSERT INTO user(username, password, email, join_date) ' +
-						`VALUES('${username}', '${hash}', '${email}', '${Date.now()}');`;
+						`VALUES('${username}', '${hash}', '${email}', '${getCurrentDate()}');`;
 
 					database.query(command, (err) => {
 						if (err) {
 							errorHandler('Cannot INSERT new user !', err);
 						} else {
-							jwt.sign(
-								{ username: username },
-								config.get('jwtSecret'),
-								{ expiresIn: 60 },
-								(err, token) => {
-									if (err) throw err;
+							command = `SELECT * FROM user WHERE username="${username}"`;
 
-									res.json({
-										token : token
-									});
+							database.query(command, (err, result) => {
+								if (err) {
+									errorHandler(
+										'Cannot SELECT user data !',
+										err
+									);
+								} else {
+									delete result[0].password;
+
+									jwt.sign(
+										{ username: username },
+										config.get('jwtSecret'),
+										{ expiresIn: 60 },
+										(err, token) => {
+											if (err) throw err;
+
+											res.json({
+												token : token,
+												user  : result[0]
+											});
+										}
+									);
 								}
-							);
+							});
 						}
 					});
 				});
